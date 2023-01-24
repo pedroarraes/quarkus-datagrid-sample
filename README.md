@@ -1,8 +1,40 @@
-# quarkus-datagrid-sample Project
+# How to use Data Grid Proto Buffer in a quarkus native cloud application 
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
-
+This smart start demostrates how to use a Data Grid Proto Buffer running in a quarkus native cloud application usinh hotrod protocol. This project uses Quarkus, the Supersonic Subatomic Java Framework.
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+## Requeriments
+* OpenJDK 17
+* Apache Maven 3.8.5
+* VSCode or any IDE maven supportable
+* Red Hat Data Grid 8.4.0
+
+## Summary
+* [Starting Red Hat Data Grid](#starting-red-hat-data-grid)
+* [Running the application in dev mode](#running-the-application-in-dev-mode)
+* [Testing API application](#testing-api-application)
+* [Understanding Java code](#understanding-java-code)
+    * [Java Classes](#java-classes)
+        * [Person.java](#person.java)
+        * [PersonContextInitializer.java](#personcontextinitializer.java)
+        * [DataGridApiEndPoint.java](#datagridapiendpoint.java)
+    * [Application.properties](#application.properties)    
+
+## Starting Red Hat Data Grid
+
+## Running the application in dev mode
+
+## Testing API application
+
+## Understanding Java code
+
+### Java Classes
+
+#### Person.java
+#### PersonContextInitializer.java
+#### DataGridApiEndPoint.java
+### Application.properties    
+
 
 ## Running the application in dev mode
 
