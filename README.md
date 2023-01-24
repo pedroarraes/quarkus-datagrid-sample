@@ -21,8 +21,17 @@ If you want to learn more about Quarkus, please visit its website: https://quark
     * [Application.properties](#application.properties)    
 
 ## Starting Red Hat Data Grid
-
+You can run Red Hat Data Grid executing command
+```shell
+$ ${DATAGRID_HOME}/bin/./server.sh
+```
+> **_NOTE:_** This smart start does not have intended to teach how to install the Data Grid or best practices. For information on installation and configuration at https://access.redhat.com/documentation/en-us/red_hat_data_grid/8.4 .
 ## Running the application in dev mode
+You can run your application in dev mode that enables live coding using:
+```shell
+$ ./mvnw compile quarkus:dev
+```
+> **_NOTE:_** Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
 ## Testing API application
 
@@ -38,12 +47,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Running the application in dev mode
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
-```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
 ## Packaging and running the application
 
