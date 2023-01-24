@@ -35,6 +35,7 @@ $ ./mvnw compile quarkus:dev
 > **_NOTE:_** Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
 ## Testing API application
+This session you'll run insert, select, update, and delete a data into Data Grid using an application API. You can use Swagger-ui at http://localhost:8080/q/swagger-ui/ or curl to execute. In this example
 
 ## Understanding Java code
 

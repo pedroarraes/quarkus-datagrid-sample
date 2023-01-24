@@ -1,5 +1,7 @@
 package org.acme;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -14,6 +16,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.infinispan.client.hotrod.RemoteCache;
+import org.infinispan.client.hotrod.Search;
+import org.infinispan.query.dsl.Query;
+import org.infinispan.query.dsl.QueryFactory;
+import org.infinispan.query.dsl.QueryResult;
 import org.jboss.logging.Logger;
 
 import io.quarkus.infinispan.client.Remote;
@@ -25,7 +31,7 @@ public class DataGridApiEndPoint {
 	private static final Logger LOGGER = Logger.getLogger(DataGridApiEndPoint.class);
 
     @Inject
-    @Remote("example")
+    @Remote("person-data")
     RemoteCache<String, Person> cache;
     
     @GET
@@ -40,6 +46,26 @@ public class DataGridApiEndPoint {
     	return Response.ok(p).status(200).build();
     }
     
+    
+    @GET
+    @Path("{birthYear}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getByBirthYear(@PathParam("birthYear") String birthYear) {
+    	
+    	QueryFactory qf = org.infinispan.client.hotrod.Search.getQueryFactory(cache);
+    	//Query<Person> q = qf.create("from person-data where birthYear = :birthYear");
+    	Query<Person> q = qf.create("FROM person_list.Person WHERE birthYear = :birthYear ORDER BY name ASC");
+    	q.setParameter("birthYear", birthYear);
+    	
+    	QueryResult<Person> qr = q.execute();
+    	
+    	List<Person> persons = qr.list();
+
+    	return Response.ok(persons).status(200).build();
+    }
+    
+       
     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
