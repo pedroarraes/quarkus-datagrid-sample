@@ -35,8 +35,70 @@ $ ./mvnw compile quarkus:dev
 > **_NOTE:_** Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
 
 ## Testing API application
-This session you'll run insert, select, update, and delete a data into Data Grid using an application API. You can use Swagger-ui at http://localhost:8080/q/swagger-ui/ or curl to execute. In this example
+This session you'll run insert, select, update, and delete a data into Data Grid using an application API. You can use Swagger-ui at http://localhost:8080/q/swagger-ui/ or curl to execute. The nexts commands are demonstrated on curl.
 
+* Inserting
+```shell
+$ curl -X 'POST' \
+  'http://localhost:8080/api' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": "1",
+  "name": "Joe",
+  "surname": "Tribiani",
+  "birthYear": 1980
+}'
+```
+```console
+{"id":"1","name":"Joe","surname":"Tribiani","birthYear":1980
+```
+```shell
+$ curl -X 'POST' \
+  'http://localhost:8080/api' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": "2",
+  "name": "Maria",
+  "surname": "Alt",
+  "birthYear": 1980
+}'
+```
+```console
+{"id":"2","name":"Maria","surname":"Alt","birthYear":1980}[
+```
+```shell
+$ curl -X 'POST' \
+  'http://localhost:8080/api' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": "3",
+  "name": "Daniel",
+  "surname": "Bush",
+  "birthYear": 1985
+}'
+```
+```console
+{"id":"3","name":"Daniel","surname":"Bush","birthYear":1985}
+```
+
+```shell
+$ curl -X 'POST' \
+  'http://localhost:8080/api' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": "4",
+  "name": "Angelica",
+  "surname": "Santos",
+  "birthYear": 19853
+}'
+```
+```console
+{"id":"4","name":"Angelica","surname":"Santos","birthYear":19853}
+```
 ## Understanding Java code
 
 ### Java Classes
