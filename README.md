@@ -15,9 +15,9 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 * [Testing API application](#testing-api-application)
 * [Understanding Java code](#understanding-java-code)
     * [Java Classes](#java-classes)
-        * [Person.java](#person-java)
-        * [PersonContextInitializer.java](#personcontextinitializer-java)
-        * [DataGridApiEndPoint.java](#datagridapiendpoint-java)
+        * [Person](#person)
+        * [PersonContextInitializer](#personcontextinitializers)
+        * [DataGridApiEndPoint](#datagridapiendpoint)
     * [Application.properties](#application-properties)    
 * [Related Guides](#Related-guides)    
 
@@ -83,7 +83,6 @@ $ curl -X 'POST' \
 ```console
 {"id":"3","name":"Daniel","surname":"Bush","birthYear":1985}
 ```
-
 ```shell
 $ curl -X 'POST' \
   'http://localhost:8080/api' \
@@ -99,13 +98,143 @@ $ curl -X 'POST' \
 ```console
 {"id":"4","name":"Angelica","surname":"Santos","birthYear":19853}
 ```
+* Updating
+```shell
+$ curl -X 'PUT' \
+  'http://localhost:8080/api' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": "4",
+  "name": "Angelica",
+  "surname": "Santos",
+  "birthYear": 1983
+}'
+```
+```console
+{"id":"4","name":"Angelica","surname":"Santos","birthYear":1983}
+```
+* Getting by KEY
+```shell
+$ curl -X 'GET' \
+  'http://localhost:8080/api/2' \
+  -H 'accept: */*'
+```
+```console
+{"id":"2","name":"Maria","surname":"Alt","birthYear":1980}
+```
+* Getting by birthYear
+```shell
+$ curl -X 'GET' \
+  'http://localhost:8080/api/query/1980' \
+  -H 'accept: */*'
+```
+```console
+[{"id":"1","name":"Joe","surname":"Tribiani","birthYear":1980},{"id":"2","name":"Maria","surname":"Alt","birthYear":1980}]
+```
+* Deleting
+```shell
+$ curl -X 'DELETE' \
+  'http://localhost:8080/api/1' \
+  -H 'accept: */*'
+```
 ## Understanding Java code
-
+In this session you will understand Java code, annotations, and comunication with Red Hat Data Grid.
 ### Java Classes
+#### Person
+```java
+package org.acme;
 
-#### Person.java
-#### PersonContextInitializer.java
-#### DataGridApiEndPoint.java
+import java.util.Objects;
+
+import org.infinispan.api.annotations.indexing.Indexed;
+import org.infinispan.api.annotations.indexing.Keyword;
+import org.infinispan.protostream.annotations.ProtoFactory;
+import org.infinispan.protostream.annotations.ProtoField;
+
+@Indexed (1)
+public class Person {
+
+	private String id;
+	private String name;
+	private String surname;
+	private Integer birthYear;
+
+	@ProtoFactory (2)
+	public Person(String id, String name, String surname, Integer birthYear) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.birthYear = birthYear;
+	}
+
+	@ProtoField(number = 1) (3)
+	public String getId() {
+		return id;
+	}
+
+	@ProtoField(number = 2)
+	public String getName() {
+		return name;
+	}
+
+	@ProtoField(number = 3)
+	public String getSurname() {
+		return surname;
+	}
+
+	@ProtoField(number = 4)
+	@Keyword(projectable = true, sortable = true) (4)
+	public Integer getBirthYear() {
+		return birthYear;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public void setBirthYear(Integer birthYear) {
+		this.birthYear = birthYear;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", name=" + name + ", surname=" + surname + ", birthYear=" + birthYear + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(birthYear, id, name, surname);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		return Objects.equals(birthYear, other.birthYear) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
+	}	
+}
+```
+(1)
+(2)
+(3)
+(4)
+#### PersonContextInitializer
+#### DataGridApiEndPoint
 ### Application.properties    
 ## Related Guides
 
