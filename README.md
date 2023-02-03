@@ -370,7 +370,7 @@ quarkus.http.access-log.pattern=common
 ## Related Guides
 - Infinispan Client ([guide](https://quarkus.io/guides/infinispan-client)): Connect to the Infinispan data grid for distributed caching.
 - SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI.
--  ([guide](https://quarkus.io/guides/getting-started#the-jax-rs-resources)): Easily start your RESTful Web Services.
+- RESTful Web Services ([guide](https://quarkus.io/guides/getting-started#the-jax-rs-resources)): Easily start your RESTful Web Services.
 
 
 
