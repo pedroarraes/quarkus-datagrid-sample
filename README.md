@@ -1,6 +1,6 @@
 # How to use Data Grid Proto Buffer in a quarkus native cloud application 
 
-This smart start demostrates how to use a Data Grid Proto Buffer running in a quarkus native cloud application usinh hotrod protocol. This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This smart start demostrates how to use a Data Grid Proto Buffer running in a quarkus native cloud application using hotrod protocol. This project uses Quarkus, the Supersonic Subatomic Java Framework.
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
 ## Requeriments
